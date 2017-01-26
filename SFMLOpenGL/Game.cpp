@@ -1,3 +1,7 @@
+/// <summary>
+/// kieran clothier c00206110
+/// adding texture to a cube
+/// </summary>
 #include <Game.h>
 
 static bool flip;
@@ -37,12 +41,12 @@ void Game::run()
 typedef struct
 {
 	float coordinate[3];
-	float color[4];
+	float color[6];
 	float texel[2];
 } Vertex;
 
-Vertex vertex[3];
-GLubyte triangles[3];
+Vertex vertex[8];
+GLubyte triangles[36];
 
 /* Variable to hold the VBO identifier and shader data */
 GLuint	index,		//Index to draw
@@ -71,7 +75,7 @@ unsigned char* img_data;
 
 void Game::initialize()
 {
-	isRunning = true;
+	isRunning = true; 
 	GLint isCompiled = 0;
 	GLint isLinked = 0;
 
@@ -82,9 +86,9 @@ void Game::initialize()
 	DEBUG_MSG(glGetString(GL_VERSION));
 
 	/* Vertices counter-clockwise winding */
-	vertex[0].coordinate[0] = -0.5f;
-	vertex[0].coordinate[1] = -0.5f;
-	vertex[0].coordinate[2] = 0.0f;
+	vertex[0].coordinate[0] = -0.5f;//x
+	vertex[0].coordinate[1] = -0.5f;//y
+	vertex[0].coordinate[2] = 0.0f;//z
 
 	vertex[1].coordinate[0] = -0.5f;
 	vertex[1].coordinate[1] = 0.5f;
@@ -93,6 +97,8 @@ void Game::initialize()
 	vertex[2].coordinate[0] = 0.5f;
 	vertex[2].coordinate[1] = 0.5f;
 	vertex[2].coordinate[2] = 0.0f;
+
+
 
 	vertex[0].color[0] = 1.0f;
 	vertex[0].color[1] = 0.0f;
@@ -119,7 +125,23 @@ void Game::initialize()
 	vertex[2].texel[1] = 0.0f;
 
 	/*Index of Poly / Triangle to Draw */
+	//FRONT
 	triangles[0] = 0;   triangles[1] = 1;   triangles[2] = 2;
+	
+	//BACK
+
+	
+	//LEFT	
+
+	
+	//RIGHT
+	
+
+	//TOP
+	
+	
+	//BOTTOM
+
 
 	/* Create a new VBO using VBO id */
 	glGenBuffers(1, vbo);
@@ -174,8 +196,8 @@ void Game::initialize()
 		"in vec2 texel;"
 		"out vec4 fColor;"
 		"void main() {"
-		//"	fColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);"
-		"	fColor = texture(f_texture, texel.st);"
+		"	fColor = vec4(0.0f, 1.0f, 0.0f, 1.0f);"
+		//"	fColor = texture(f_texture, texel.st);"
 		"}"; //Fragment Shader Src
 
 	DEBUG_MSG("Setting Up Fragment Shader");
@@ -282,18 +304,18 @@ void Game::update()
 		}
 	}
 
-	//Change vertex data
-	vertex[0].coordinate[0] += -0.0001f;
-	vertex[0].coordinate[1] += -0.0001f;
-	vertex[0].coordinate[2] += -0.0001f;
+	////Change vertex data
+	//vertex[0].coordinate[0] += -0.0001f;
+	//vertex[0].coordinate[1] += -0.0001f;
+	//vertex[0].coordinate[2] += -0.0001f;
 
-	vertex[1].coordinate[0] += -0.0001f;
-	vertex[1].coordinate[1] += -0.0001f;
-	vertex[1].coordinate[2] += -0.0001f;
+	//vertex[1].coordinate[0] += -0.01001f;
+	//vertex[1].coordinate[1] += -0.0001f;
+	//vertex[1].coordinate[2] += -0.0001f;
 
-	vertex[2].coordinate[0] += -0.0001f;
-	vertex[2].coordinate[1] += -0.0001f;
-	vertex[2].coordinate[2] += -0.0001f;
+	//vertex[2].coordinate[0] += -0.0001f;
+	//vertex[2].coordinate[1] += -0.0001f;
+	//vertex[2].coordinate[2] += -0.0001f;
 
 #if (DEBUG >= 2)
 	DEBUG_MSG("Update up...");
